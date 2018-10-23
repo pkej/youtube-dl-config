@@ -1,0 +1,23 @@
+#-v
+--no-overwrites # never overwrite
+#--simulate
+--exec '"C:\Program Files\SubtitleEdit\SubtitleEdit" /convert *.ttml Structuredtitles /encoding:utf-8 &' # convert ttml files to srt.
+--ffmpeg-location "C:\Program Files\ffmpeg\bin"
+--restrict-filename #no strange chars
+--embed-subs #put all subs into the file
+--embed-thumbnail #embed the thumbnail into the finished file needs AtomicParsley
+--add-metadata #add metaddata to the container
+--write-description
+--write-info-json
+--write-annotations
+--xattrs #add metadata to xattrs of the file
+--continue #continue downloading where you last left off
+--convert-subs srt #this is the standard
+#--no-part # don't use partials
+#--metadata-from-title "(?P<series>.+?) (?P<episode_number>.+?)"
+-o "%USERPROFILE%\Videos\%(series)s\season0%(season_number)s\%(series)s - s0%(season_number)se0%(episode_number)s - %(episode)s-%(title)s- %(width)sx%(height)s %(fps)sfps %(tbr)stotal bps %(vcodec)s %(container)s %(vbr)svideo bps %(asr)sHz.%(ext)s"
+--all-subs #download all subs available
+-f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best' #prefer mp4 and default to best video
+--batch-file "%USERPROFILE%\Videos\_download.txt" #download from this file
+--download-archive "%USERPROFILE%\Videos\_archive.txt" #make a list over downloaded files.
+-k
